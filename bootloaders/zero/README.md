@@ -92,4 +92,8 @@ For example for the **Arduino MKR1000** we use `board_definitions_arduino_mkr100
 ```
 BOARD_ID=arduino_mkr1000 NAME=samd21_sam_ba_arduino_mkr1000 make clean all
 ```
+or for RV1G MiniSumo 2018, do:
 
+```
+BOARD_ID=rv1g_minisumo_2018 NAME=samd21_sam_ba_rv1g_minisumo_2018 make clean all
+```
