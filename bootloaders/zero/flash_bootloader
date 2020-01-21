@@ -1,0 +1,20 @@
+#!/bin/bash
+if [[ "$#" -ne 1 ]]; then
+    echo "Usage: \
+    $0 binary_filename";
+        exit 1 ;
+fi
+# Uncomment one Option to
+# select the matching "Driver"
+
+# Segger JLink SWD interface
+openocd -f interface/jlink.cfg -c "transport select swd; adapter_khz 4; " -f target/at91samdXX.cfg -c "init; reset; halt; at91samd chip-erase; reset halt;
+at91samd bootloader 0
+program $1 verify"
+flash write_image erase $1 0x08000000; reset; exit;"
+
+# STLink V2 - Clone
+#sudo openocd -f tools/STLinkV2_Clone/stlink-v2.cfg -c "init; halt; flash write_image erase $1 0x08000000; reset; exit"
+
+# FTDI - Link
+#sudo openocd -f tools/FTDI/openocd.cfg -c "init; halt; flash write_image erase $1 0x08000000; reset; exit"

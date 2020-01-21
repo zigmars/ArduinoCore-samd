@@ -97,3 +97,10 @@ or for RV1G MiniSumo 2018, do:
 ```
 BOARD_ID=rv1g_minisumo_2018 NAME=samd21_sam_ba_rv1g_minisumo_2018 make clean all
 ```
+## Uploading with jlink
+
+If OpenOCD is installed and jlink with target connected, use the following command to flash (given the binary in current directory):
+
+```
+./flash_bootloader samd21_sam_ba_rv1g_minisumo_2018.bin
+```
