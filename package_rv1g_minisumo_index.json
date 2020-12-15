@@ -4,7 +4,7 @@
     {
       "name": "rv1g",
       "maintainer": "Zigmars Rupenheits",
-      "websiteURL": "http://www.arduino.cc/en/Reference/HomePage",
+      "websiteURL": "https://github.com/zigmars/ArduinoCore-samd/",
       "help":
       {
         "online": "http://www.arduino.cc/en/Reference/HomePage"
@@ -16,7 +16,7 @@
           "architecture": "samd",
           "version": "1.0.2",
           "category": "Contributed",
-          "url": "file:///Users/zigmars/Desktop/rv1g_minisumo.tar.gz",
+          "url": "https://github.com/zigmars/ArduinoCore-samd/raw/master/rv1g_minisumo.tar.gz",
           "archiveFileName": "rv1g_minisumo.tar.gz",
           "checksum": "SHA-256:24a2b6c6a50beb0305c0c0994d3bfa81d1497cad492907616bad74b73dcfd0c7",
           "size": "969113",
