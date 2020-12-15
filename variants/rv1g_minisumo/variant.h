@@ -53,14 +53,11 @@ extern "C"
  *----------------------------------------------------------------------------*/
 
 // Number of pins defined in PinDescription array
-#ifdef __cplusplus
-extern "C" unsigned int PINCOUNT_fn();
-#endif
-#define PINS_COUNT           (PINCOUNT_fn())
-#define NUM_DIGITAL_PINS     (20u)
-#define NUM_ANALOG_INPUTS    (6u)
-#define NUM_ANALOG_OUTPUTS   (1u)
-#define analogInputToDigitalPin(p)  ((p < 6u) ? (p) + 14u : -1)
+#define PINS_COUNT           (35u)
+#define NUM_DIGITAL_PINS     (28u)
+#define NUM_ANALOG_INPUTS    (4u)
+#define NUM_ANALOG_OUTPUTS   (0u)
+#define analogInputToDigitalPin(p)  ((p < 4u) ? (p) + 30u : -1)
 
 #define digitalPinToPort(P)        ( &(PORT->Group[g_APinDescription[P].ulPort]) )
 #define digitalPinToBitMask(P)     ( 1 << g_APinDescription[P].ulPin )
@@ -80,100 +77,136 @@ extern "C" unsigned int PINCOUNT_fn();
 // #define digitalPinToTimer(P)
 
 // LEDs
-#define PIN_LED_13           (13u)
-#define PIN_LED_RXL          (25u)
-#define PIN_LED_TXL          (26u)
-#define PIN_LED              PIN_LED_13
-#define PIN_LED2             PIN_LED_RXL
-#define PIN_LED3             PIN_LED_TXL
-#define LED_BUILTIN          PIN_LED_13
+// #define PIN_LED_RXL          (11u)
+// #define PIN_LED_TXL          (12u)
+// #define PIN_LED2             PIN_LED_RXL
+// #define PIN_LED3             PIN_LED_TXL
+
 
 /*
  * Analog pins
  */
-#define PIN_A0               (14ul)
-#define PIN_A1               (15ul)
-#define PIN_A2               (16ul)
-#define PIN_A3               (17ul)
-#define PIN_A4               (18ul)
-#define PIN_A5               (19ul)
-#define PIN_DAC0             (14ul)
+#define PIN_A0               (30ul)
+#define PIN_A1               (31ul)
+#define PIN_A2               (32ul)
+#define PIN_A3               (33ul)
+
 
 static const uint8_t A0  = PIN_A0;
 static const uint8_t A1  = PIN_A1;
 static const uint8_t A2  = PIN_A2;
 static const uint8_t A3  = PIN_A3;
-static const uint8_t A4  = PIN_A4;
-static const uint8_t A5  = PIN_A5;
-static const uint8_t DAC0 = PIN_DAC0;
 #define ADC_RESOLUTION		12
 
-// Other pins
-#define PIN_ATN              (38ul)
-static const uint8_t ATN = PIN_ATN;
 
 /*
  * Serial interfaces
  */
-// Serial (EDBG)
-#define PIN_SERIAL_RX       (31ul)
-#define PIN_SERIAL_TX       (30ul)
-#define PAD_SERIAL_TX       (UART_TX_PAD_2)
-#define PAD_SERIAL_RX       (SERCOM_RX_PAD_3)
+// Serial 
+#define PIN_SERIAL_RX       (0ul)
+#define PIN_SERIAL_TX       (1ul)
+#define PAD_SERIAL_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL_RX       (SERCOM_RX_PAD_1)
 
-// Serial1
-#define PIN_SERIAL1_RX       (0ul)
-#define PIN_SERIAL1_TX       (1ul)
-#define PAD_SERIAL1_TX       (UART_TX_PAD_2)
-#define PAD_SERIAL1_RX       (SERCOM_RX_PAD_3)
+
+
+/*
+ * Wire Interfaces
+ */
+#define WIRE_INTERFACES_COUNT 3
+
+// #define PIN_WIRE_SDA         (16u)
+// #define PIN_WIRE_SCL         (17u)
+// #define PERIPH_WIRE          sercom3
+// #define WIRE_IT_HANDLER      SERCOM3_Handler
+
+// ToF sensor
+#define PIN_WIRE_SDA         (20u)
+#define PIN_WIRE_SCL         (21u)
+#define PERIPH_WIRE          sercom1
+#define WIRE_IT_HANDLER      SERCOM1_Handler
+
+static const uint8_t SDA = PIN_WIRE_SDA;
+static const uint8_t SCL = PIN_WIRE_SCL;
+
+// IMU interface
+#define PIN_WIRE1_SDA         (16u)
+#define PIN_WIRE1_SCL         (17u)
+#define PERIPH_WIRE1          sercom3
+#define WIRE1_IT_HANDLER      SERCOM3_Handler
+
+// OLED interface
+#define PIN_WIRE2_SDA         (18u)
+#define PIN_WIRE2_SCL         (19u)
+#define PERIPH_WIRE2          sercom2
+#define WIRE2_IT_HANDLER      SERCOM2_Handler
+
+
 
 /*
  * SPI Interfaces
  */
 #define SPI_INTERFACES_COUNT 1
 
-#define PIN_SPI_MISO         (22u)
-#define PIN_SPI_MOSI         (23u)
-#define PIN_SPI_SCK          (24u)
+#define PIN_SPI_MISO         (0)
+#define PIN_SPI_MOSI         (1)
+#define PIN_SPI_SCK          (2)
 #define PERIPH_SPI           sercom4
 #define PAD_SPI_TX           SPI_PAD_2_SCK_3
 #define PAD_SPI_RX           SERCOM_RX_PAD_0
 
-static const uint8_t SS	  = PIN_A2 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
+static const uint8_t SS   = PIN_A2 ;  // SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
 static const uint8_t MOSI = PIN_SPI_MOSI ;
 static const uint8_t MISO = PIN_SPI_MISO ;
 static const uint8_t SCK  = PIN_SPI_SCK ;
 
 /*
- * Wire Interfaces
- */
-#define WIRE_INTERFACES_COUNT 1
-
-#define PIN_WIRE_SDA         (20u)
-#define PIN_WIRE_SCL         (21u)
-#define PERIPH_WIRE          sercom3
-#define WIRE_IT_HANDLER      SERCOM3_Handler
-
-static const uint8_t SDA = PIN_WIRE_SDA;
-static const uint8_t SCL = PIN_WIRE_SCL;
-
-/*
  * USB
  */
-#define PIN_USB_HOST_ENABLE (27ul)
 #define PIN_USB_DM          (28ul)
 #define PIN_USB_DP          (29ul)
 
-/*
- * I2S Interfaces
- */
-#define I2S_INTERFACES_COUNT 1
 
-#define I2S_DEVICE          0
-#define I2S_CLOCK_GENERATOR 3
-#define PIN_I2S_SD          (9u)
-#define PIN_I2S_SCK         (1u)
-#define PIN_I2S_FS          (0u)
+
+
+
+/* 
+ * Mini Sumo
+ */
+#define PIN_FLR_LEFT        (30ul)
+#define PIN_FLR_RIGHT       (31ul)
+#define PIN_FLR_BACK        (32ul)
+#define PIN_ADC_BAT         (33ul)
+
+#define PIN_IR_SENSOR1      (2ul)
+#define PIN_IR_SENSOR2      (3ul)
+#define PIN_IR_SENSOR3      (4ul)
+#define PIN_IR_SENSOR4      (5ul)
+#define PIN_IR_SENSOR5      (6ul)
+#define PIN_IR_LED          (26ul)
+
+#define PIN_LED_RED         (11u)
+#define PIN_LED_GREEN       (12u)
+
+#define PIN_MOTOR1_1        (7ul)
+#define PIN_MOTOR2_2        (8ul)
+#define PIN_MOTOR1_2        (9ul)
+#define PIN_MOTOR2_1        (10ul)
+
+#define PIN_BUTTON1         (13ul)
+#define PIN_BUTTON2         (14ul)
+#define PIN_BUTTON3         (34ul)
+
+#define PIN_LASER_1_RST     (22ul)
+#define PIN_LASER_2_RST     (23ul)
+#define PIN_LASER_3_RST     (24ul)
+
+#define PIN_LED_NEO         (25ul)
+#define COUNT_LED_NEO       (5u)
+
+#define PIN_BUZZER          (27ul)
+
+
 
 #ifdef __cplusplus
 }
@@ -197,16 +230,7 @@ extern SERCOM sercom4;
 extern SERCOM sercom5;
 
 extern Uart Serial;
-extern Uart Serial1;
 
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-unsigned int PINCOUNT_fn();
-#ifdef __cplusplus
-}
 #endif
 
 // These serial port names are intended to allow libraries and architecture-neutral
@@ -226,9 +250,9 @@ unsigned int PINCOUNT_fn();
 //                            pins are NOT connected to anything by default.
 #define SERIAL_PORT_USBVIRTUAL      SerialUSB
 #define SERIAL_PORT_MONITOR         Serial
-// Serial has no physical pins broken out, so it's not listed as HARDWARE port
-#define SERIAL_PORT_HARDWARE        Serial1
-#define SERIAL_PORT_HARDWARE_OPEN   Serial1
+// // Serial has no physical pins broken out, so it's not listed as HARDWARE port
+// #define SERIAL_PORT_HARDWARE        Serial1
+// #define SERIAL_PORT_HARDWARE_OPEN   Serial1
 
 #endif /* _VARIANT_ARDUINO_ZERO_ */
 
